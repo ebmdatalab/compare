@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>COMPare: Tracking switched outcomes in clinical trials</title>
+
+    <meta name="description" content="The COMPare project takes a new approach to identifying switched outcomes in clinical trials. We are monitoring all trials published in all top five medical journals, identifying the switched outcomes, then writing to the journal to correct the record, and posting the results online.">
+    <meta name="copyright" content="EBM Data Lab, Centre for Evidence-Based Medicine, University of Oxford" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <meta property="og:title" content="COMPare: Tracking switched outcomes in clinical trials" />
+    <meta property="og:type" content="article" />
+    <meta property="og:description" content="The COMPare project takes a new approach to identifying switched outcomes in clinical trials. We are monitoring all trials published in all top five medical journals, identifying the switched outcomes, then writing to the journal to correct the record, and posting the results online." />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="COMPare: Tracking switched outcomes in clinical trials" />
+    <meta name="twitter:description" content="The COMPare project takes a new approach to identifying switched outcomes in clinical trials. We are monitoring all trials published in all top five medical journals, identifying the switched outcomes, then writing to the journal to correct the record, and posting the results online." />
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/s/bs-3.3.5/jqc-1.11.3,dt-1.10.10,fh-3.1.0,r-2.0.0/datatables.min.css"/>
+    <link href='https://fonts.googleapis.com/css?family=Raleway:400,600,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="shortcut icon" type="image/png" href="/favicon.ico?v=2"/>
+
+    <script>
+        (function(_,e,rr,s){_errs=[s];var c=_.onerror;_.onerror=function(){var a=arguments;_errs.push(a);
+        c&&c.apply(this,a)};var b=function(){var c=e.createElement(rr),b=e.getElementsByTagName(rr)[0];
+        c.src="//beacon.errorception.com/"+s+".js";c.async=!0;b.parentNode.insertBefore(c,b)};
+        _.addEventListener?_.addEventListener("load",b,!1):_.attachEvent("onload",b)})
+        (window,document,"script","5649a8b93fa45e025a0015ee");
+    </script>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-70146570-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+</head>
+<body>
+
+     <nav class="navbar navbar-default">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#results">Our results</a></li>
+            <li><a href="#team">Our team</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+     <div class="container" id="main">
+
+        <h1>The <span class="stronger">COMP</span>are Project</h1>
+        <h3><span class="stronger">C</span>entre for Evidence-Based Medicine <span class="stronger">O</span>utcomes <span class="stronger">M</span>onitoring <span class="stronger">P</span>roject: Tracking Switched Outcomes in Clinical Trials</h3>
+
+        <hr />
+
+        <h2 id="problem">The problem</h2>
+
+        <p>Before carrying out a clinical trial, all outcomes that will be measured (e.g. blood pressure after one year of treatment) must be pre-specified in a trial protocol and on a clinical trial registry (e.g. <a href="http://clinicaltrials.gov">clinicaltrials.gov</a>). This is because if researchers measure lots of things, some of those things are likely to give a positive result by random chance (a false positive). A pre-specified outcome is much less likely to give a false-positive result. In the trial report, all pre-specified outcomes must then be reported, to ensure a fair picture of the trial results.</p>
+
+        <p>However, pre-specified outcomes are often left <em>unreported</em>, while novel outcomes that were not pre-specified <em>are</em> reported. This is an extremely common problem that distorts the evidence we use to make real-world clinical decisions.</p>
+
+        <h2 id="approach">Our approach</h2>
+
+        <p>The COMPare project takes a new approach. We are monitoring all trials published in the top five medical journals (NEJM, JAMA, The Lancet, Annals of Internal Medicine, BMJ). We are analysing each trial for outcome switching, by comparing the clinical trials registry and trial protocol with the trial report. For any trial where we find that outcomes have been switched, we are writing letters to the journal to correct the record. All of our results will also be posted here.</p>
+
+        <p>Through increased awareness of misreported outcomes, individual accountability, and feedback for specific journals, we hope to fix this ongoing problem.</p>
+
+        <p>Download <a href="downloads/protocol.pdf">our protocol</a> (PDF).</p>
+
+        <h2 id="results">Our results</h2>
+
+          <p>We began assessing trials for switched outcomes, and sending letters to journals, in October 2015. See below for the results to date, and an explanation of what is included in this table.</p>
+
+        <div id="table">
+            <div id="loading">Loading trials...</div>
+        </div>
+
+        <p>The table above contains a row for every trial. There are links to our letter, and the letter's publication status. We also show a summary of the data: the number of prespecified outcomes correctly reported (for a correctly reported paper this should be 100%); and the number of novel, undeclared, non-prespecified outcomes added in the paper (for a correctly reported paper this should be 0).</p>
+
+        <p>Each row also contains a link to our full assessment sheet for that trial, which is filled out by the two coders who audited that trial, then checked at our weekly project meeting. It lists the pre-specified primary outcomes, whether they were reported, and also lists any new outcomes added. This raw datasheet is shared online to ensure that all our data and working is fully transparent. We are happy to receive <a href="#contact">feedback</a> on any scoring from the trialists concerned.</p>
+
+        <p>Some trials have perfect outcome reporting and no letter is required: these are posted immediately to the table above. Otherwise, we add trials to the table either (i) four weeks after sending our letter, or (ii) when the journal publishes or refuses to publish the letter (whichever comes first). All letters are also posted to <a href="http://www.ncbi.nlm.nih.gov/pubmedcommons/">PubmedCommons</a>, to try to ensure that the information on outcome switching is available to those using the trial to make decisions about patient care.</p>
+
+       <h2 id="team">Our team</h2>
+
+       <p>We are a team of academics and medical students, based at the University of Oxford.</p>
+
+        <div class="row">
+
+          <div class="col-sm-6 col-md-6">
+            <div class="thumbnail bio">
+                <img src="/img/ben.png" alt="Ben Goldacre">
+                <h3>Dr. Ben Goldacre</h3>
+                <p>Ben Goldacre is a doctor, academic, campaigner and writer whose work focuses on uses and misuses of science and statistics by journalists, politicians, drug companies and quacks. His first book Bad Science reached #1 in the UK non-fiction charts and has sold over half a million copies worldwide. His second book Bad Pharma discusses problems in medicine, focusing on missing trials, badly designed research, and biased dissemination of evidence. His third is a collection of columns and papers. He wrote the Bad Science column for a decade in the UK Guardian newspaper, and has written for the Times, the Telegraph, the Mail, the New York Times, the BMJ, and more, alongside presenting documentaries for the BBC, and appearing regularly on radio and TV.
+                In policy work, he is co-author of a 2012 UK government Cabinet Office paper on getting more randomised controlled trials on policy questions; conducted an independent external review in 2012 for the Department for Education on how to improve the use of evidence in teaching; and is co-founder of <a href="http://www.alltrials.net/">AllTrials</a>, a campaign by doctors, academics, funders, pharmacists, professional bodies, patients and the public, to prevent trial results being withheld. His non-profit company Better Data has built <a href="http://www.randomiseme.org/">RandomiseMe</a>, an open trials platform for the general public; he is PI on <a href="http://opentrials.net/">OpenTrials</a>, a linked database on clinical trials; and he has worked on various health IT projects such as <a href="http://www.prescribinganalytics.com/">prescribinganalytics.com</a> and <a href="http://openprescribing.org">openprescribing.org</a>.
+                Ben is currently a Research Fellow in Epidemiology at LSHTM, and a Senior Clinical Research Fellow at the <a href="http://www.cebm.net/">Centre for Evidence-Based Medicine</a> in the University of Oxford. His blog is at <a href="http://www.badscience.net">badscience.net</a> and he is <a href="https://twitter.com/bengoldacre">@bengoldacre</a> on Twitter.</p>
+            </div>
+          </div>
+
+          <div class="col-sm-6 col-md-6">
+            <div class="thumbnail bio">
+                <img src="/img/henry.png" alt="Henry Drysdale">
+                <h3>Henry Drysdale</h3>
+                <p>Henry Drysdale is a graduate-entry medical student at St Anne’s College, Oxford. He graduated with a first class BSc in Physics from Imperial College London, where he specialised in medical physics and imaging. He is also a Physics and Maths tutor for A-Level and undergraduate students in Oxford.
+                Henry has a special interest in anesthetics, in which he plans to pursue a clinical and academic career. He is also passionate about improving the quality of evidence on which clinical decisions are made.</p>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="row">
+
+          <div class="col-sm-6 col-md-6">
+            <div class="thumbnail bio">
+                <img src="/img/aaron.png" alt="Aaron Dale">
+                <h3>Aaron Dale</h3>
+                <p>Aaron Dale is a graduate-entry medicine student at Green Templeton College, University of Oxford. He holds a BA in Natural Sciences and an MSci in Biochemistry from Churchill College, University of Cambridge. Aaron completed an MRC Capacity-Building PhD Studentship in drug discovery at The School of Pharmacy, University College London for work on the symmetric bis-benzimidazole series of compounds as potential anti-microbial agents.
+                He has personally volunteered as a patient in several phase 1 clinical trials and has a keen interest in improving the standards of clinical trial reporting to build a stronger evidence base for medical treatments. He has contributed to several articles in the Student BMJ on how to improve evidence-based medicine.
+                <em>Conflicts of interest and payments:</em> Aaron works part time as a private tutor for A-level and GCSE biology and chemistry. He receives a stipendiary income from the Foulkes Foundation and has received payment for presentations at medical careers events and for undergraduate teaching at Imperial College London.</p>
+            </div>
+          </div>
+
+          <div class="col-sm-6 col-md-6">
+            <div class="thumbnail bio">
+                <img src="/img/philip.png" alt="Philip Hartley">
+                <h3>Philip Hartley</h3>
+                <p>Philip Hartley is a graduate-entry medical student and Junior Dean at The Queen’s College Oxford. He graduated from Lincoln College Oxford with a Masters Degree in Chemistry specialising in x-ray absorption and x-ray emission spectroscopy of transparent conducting oxides.
+                Before entering medical school he worked as a teacher in London as part of the TeachFirst programme. He has a special interest in the methods used for reporting clinical trials and how these translate into clinical practice.</p>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="row">
+          <div class="col-sm-6 col-md-6">
+            <div class="thumbnail bio">
+                <img src="/img/ioan.png" alt="Ioan Milosevic">
+                <h3>Ioan Milosevic</h3>
+                <p>Ioan Milosevic is a graduate-entry medical student at the University of Oxford, having previously studied Experimental and Theoretical Physics at Cambridge University, and spent a number of years teaching Mathematics in secondary school. His Master's project was to investigate the possibility of neutrino astronomy.</p>
+            </div>
+          </div>
+
+          <div class="col-sm-6 col-md-6">
+            <div class="thumbnail bio">
+                <img src="/img/eirion.png" alt="Eirion Slade">
+                <h3>Eirion Slade</h3>
+                <p>Eirion Slade is a graduate-entry medical student and tutor at St Catherine’s college, Oxford. He graduated with an MPhys degree in physics from Keble College, Oxford, during which he specialised in quantum optics and information theory.
+                He also works as a private physics and maths tutor in Oxford. He has a special interest in orthopaedic surgery and is dedicated to ensuring that medical and surgical evidence is produced and interpreted in a way that maximises the wellbeing of patients.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+
+          <div class="col-sm-6 col-md-6">
+            <div class="thumbnail bio">
+                <img src="/img/kamal.png" alt="Kamal Mahtani">
+                <h3>Dr. Kamal Mahtani</h3>
+                <p><a href="https://www.phc.ox.ac.uk/team/kamal-mahtani">Kamal Mahtani</a> (BSc PhD MBBS PGDip MRCGP) is an NHS GP, NIHR Clinical Lecturer and Deputy Director at the <a href="http://www.cebm.net/">Centre for Evidence-Based Medicine</a>. His main activities are divided between providing direct clinical care to patients, research and teaching.
+                As a researcher his main focus is on evidence synthesis and the acquisition and generation of high quality evidence that can support and underpin clinical practice and policy. Pivotal to this is the transparent availability of all data, and for that reason he is a supporter of the <a href="http://www.alltrials.net/">AllTrials</a> campaign.</p>
+            </div>
+          </div>
+
+          <div class="col-sm-6 col-md-6">
+            <div class="thumbnail bio">
+                <img src="/img/carl.png" alt="Carl Heneghan">
+                <h3>Prof. Carl Heneghan</h3>
+                <p><a href="http://www.phc.ox.ac.uk/team/carl-heneghan">Carl Heneghan</a> is Professor of Evidence-Based Medicine, Director of the <a href="http://www.cebm.net">Centre for Evidence-Based Medicine</a>, a General Practitioner and Senior Tutor of Kellogg College.
+                He is a clinical epidemiologist and so studies patients who see clinicians, especially those with common problems, and his work focuses on improving the evidence-base to change practice. His research interests include NCDs and he currently chairs WHO guidelines on self-care and CVD risk and co-directs a WHO collaboration centre. He is a PI on four multi-centre randomized trials and chairs two NIHR trial steering committees. His research includes treatment of communicable diseases in primary care, most notably the work on the Tamiflu systematic reviews.
+                Carl's work also includes investigating the evidence base for publication bias and drug and device regulation, and he is an international expert, advising governments, on the regulatory and evidence requirements for devices and drugs as well as evidence-based projects in the public interest. He is also a founder of the <a href="http://www.alltrials.net/">AllTrials</a> campaign. As a clinical epidemiologist Prof Heneghan has extensive experience in systematic reviews and quantitative methodologies.
+                <em>Conflicts of interest and payments:</em> Carl Heneghan has received expenses from the WHO and holds grant funding from the NIHR, the National School of Primary Care Research, the Wellcome Trust and the WHO. In addition, he is an expert witness in an ongoing medical device legal case, has received payment for analysing and appraising guidelines and receives income from the publication of a series of toolkit books published by Blackwells. On occasion he receives expenses for teaching EBM and is also paid for his GP work in the out of hours service in Oxford.</p>
+            </div>
+          </div>
+        </div>
+
+        <h2 id="contact">Contact</h2>
+        <p>For more information contact Dr. Ben Goldacre: <a href="mailto:info@ebmdatalab.net">info@ebmdatalab.net</a></p>
+
+     </div>
+
+     <footer class="footer">
+      <div class="container">
+            <span class="logos">
+            <a href="http://www.ox.ac.uk"><img src="/img/oxford_logo.png" alt="University of Oxford logo" height='40' /></a>
+            <a href="http://www.phc.ox.ac.uk"><img src="/img/nuffield_logo.png" alt="Nuffield Department of Primary Care Health Sciences logo" height='40' /></a>
+            <a href="http://www.cebm.net/"><img src="/img/cebm_logo.png" alt="Centre for Evidence-Based Medicine logo" height='40' /></a>
+            </span>
+            <div class="social">
+              <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://compare-trials.org" data-text="The COMPare project: Tracking switched outcomes in clinical trials">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+            </div>
+      </div>
+    </footer>
+
+    <script type="text/javascript" src="https://cdn.datatables.net/s/bs-3.3.5/jqc-1.11.3,dt-1.10.10,fh-3.1.0,r-2.0.0/datatables.min.js"></script>
+    <script src="/js/tabletop.js"></script>
+    <script src="/js/trunk8.js"></script>
+    <script src="/js/index.js"></script>
+
+</body>
+</html>
