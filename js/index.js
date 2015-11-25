@@ -127,7 +127,7 @@
 
                 // Parse non-prespecified outcomes column.
                 var non_prespecified = d['totalnumberofnon-prespecifiedoutcomesreported'],
-                    non_prespecified_ok = d['numberofprespecifiedsecondaryoutcomesreportedsomewhereinthepublicationotherthanmainresultstable'];
+                    non_prespecified_ok = d['numberofnon-prespecifiedoutcomescorrectlyreportedienoveloutcomesbutdescribedassuchinthepaper'];
                 d.non_prespecified_outcomes = (non_prespecified) ? non_prespecified : 0;
                 d.non_prespecified_outcomes -= (non_prespecified_ok) ? non_prespecified_ok: 0;
 
