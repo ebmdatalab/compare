@@ -1,6 +1,13 @@
 (function() {
 
-    var tableId = 'myTable';
+    var total_trial_count = 0,
+        total_prespec_unreported = 0,
+        total_nonprespec_reported = 0,
+        total_correct_outcomes = 0,
+        total_all_outcomes = 0;
+    not_public_str = 'Not yet public';
+
+    var assessment_tooltip = "We give the journal four weeks to publish the trial.";
     var prespec_tooltip = 'Out of all the outcomes that were specified in advance, ';
     prespec_tooltip += 'how many are reported in the final paper? This ';
     prespec_tooltip += 'should be 100%.';
@@ -13,31 +20,15 @@
 
     var key = "1EgNcKJ_p4v7P0JNq5GSElKGvDX88z8QZN52n8C-yQAc";
     var columns = [
-        { "data": "trialtitle",
+        { "data": "trial",
           "title": "Trial",
           "width": "20%",
-          "mRender": function (data, type, row) {
-                var html = "<strong>" + row.journalname;
-                html += "</strong>: <a target='_blank' href='";
-                html += row.linktoonlinetrialreport + "'>";
-                html += (row.trialtitle.length > 100) ? row.trialtitle.substring(0, 100) + '...' : row.trialtitle;
-                html += "</a>";
-                return html;
-            }
         },
-        { "data": "publicationdate",
-          "title": "Publication date"
+        { "data": "trialpublicationdate",
+          "title": "Trial published"
         },
         { "data": "linktoassessment",
           "title": "Our assessment",
-          "mRender": function (data, type, row) {
-                var html = '';
-                if (row.linktoassessment) {
-                    html = "<a target='_blank' href='" + row.linktoassessment + "'>";
-                    html += "Read online</a>";
-                }
-                return html;
-          },
           "orderable": false
         },
         { "data": "outcomes_str",
@@ -49,20 +40,15 @@
           }
         },
         { "data": "non_prespecified_outcomes",
-          "title": 'Undeclared non-prespecified outcomes reported<span data-toggle="tooltip" title="' + nonprespec_tooltip +'"> <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span></span>'
-        },
-        { "data": "lettersentdate",
-          "title": 'Letter sent<span data-toggle="tooltip" title="' + letter_tooltip +'"> <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span></span>',
-          "mRender": function (data, type, row) {
-                var html;
-                if (row.linktoletter && (row.linktoletter !== 'Letter not required')) {
-                    html = row.lettersentdate + " <a target='_blank' href='" + row.linktoletter + "'>";
-                    html += "Read online</a>";
-                } else {
-                    html = row.linktoletter;
-                }
-                return html;
+          "title": 'Undeclared non-prespecified outcomes reported<span data-toggle="tooltip" title="' + nonprespec_tooltip +'"> <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span></span>',
+          "type": "num",
+          "render": {
+            "_": "display",
+            "sort": "sort"
           }
+        },
+        { "data": "lettersent",
+          "title": 'Letter sent<span data-toggle="tooltip" title="' + letter_tooltip +'"> <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span></span>',
         },
         { "data": "letterpublisheddate",
           "title": "Letter published"
@@ -97,13 +83,16 @@
             proxy: 'https://compare-trials.s3.amazonaws.com',
             postProcess: function(d) {
 
-                // Parse dates into YYYY-MM-DD for string sorting purposes.
-                d.publicationdate = parseDate(d.publicationdate);
-                d.lettersentdate = parseDate(d.lettersentdate);
-                if (d.letterpublisheddate !== 'Letter not published') {
-                    d.letterpublisheddate = parseDate(d.letterpublisheddate);
-                }
+                total_trial_count += 1;
 
+                // Title and publication date.
+                d.trial = "<strong>" + d.journalname + "</strong>: <a target='_blank' href='";
+                d.trial += d.linktoonlinetrialreport + "'>";
+                d.trial += (d.trialtitle.length > 100) ? d.trialtitle.substring(0, 100) + '...' : d.trialtitle;
+                d.trial += "</a>";
+                d.trialpublicationdate = parseDate(d.publicationdate);
+
+                // Calculate data for outcomes columns, and add to running counts.
                 // Parse numerator for prespecified outcomes column.
                 var primary_correct = d.numberofprespecifiedprimaryoutcomescorrectlyreported,
                     secondary_correct = d.numberofprespecifiedsecondaryoutcomescorrectlyreported,
@@ -113,14 +102,17 @@
                 d.correct_outcomes += (secondary_correct) ? secondary_correct : 0;
                 d.correct_outcomes += (primary_elsewhere) ? primary_elsewhere : 0;
                 d.correct_outcomes += (secondary_elsewhere) ? secondary_elsewhere : 0;
+                total_correct_outcomes += d.correct_outcomes;
 
                 // Parse denominator for prespecified outcomes column.
                 var total_primary = d.totalnumberofprespecifiedprimaryoutcomes,
                     total_secondary = d.totalnumberofprespecifiedsecondaryoutcomes;
                 d.all_outcomes = (total_primary) ? total_primary : 0;
                 d.all_outcomes += (total_secondary) ? total_secondary : 0;
+                total_all_outcomes += d.all_outcomes;
+                total_prespec_unreported += (d.all_outcomes - d.correct_outcomes);
 
-                // Parse numerator and denominator into string.
+                // Parse numerator and denominator into final values for sort and display.
                 d.outcomes_str = {};
                 d.outcomes_str.sort = (d.all_outcomes > 0) ? (d.correct_outcomes / d.all_outcomes) * 100 : 0;
                 d.outcomes_str.display = d.correct_outcomes + '/' + d.all_outcomes + ' (' + Math.round(d.outcomes_str.sort * 10) / 10 + '%)';
@@ -128,10 +120,18 @@
                 // Parse non-prespecified outcomes column.
                 var non_prespecified = d['totalnumberofnon-prespecifiedoutcomesreported'],
                     non_prespecified_ok = d['numberofnon-prespecifiedoutcomescorrectlyreportedienoveloutcomesbutdescribedassuchinthepaper'];
-                d.non_prespecified_outcomes = (non_prespecified) ? non_prespecified : 0;
-                d.non_prespecified_outcomes -= (non_prespecified_ok) ? non_prespecified_ok: 0;
+                var val = (non_prespecified) ? non_prespecified : 0;
+                val -= (non_prespecified_ok) ? non_prespecified_ok: 0;
+                d.non_prespecified_outcomes = {
+                    'sort': val,
+                    'display': val
+                };
+                total_nonprespec_reported += val;
 
-                // Parse 'letter required' column.
+                d.lettersentdate = parseDate(d.lettersentdate);
+                d.letterpublisheddate = parseDate(d.letterpublisheddate);
+
+                // Show friendly strings where required.
                 if (d['finaldecision-letterrequired'] === 'No') {
                     d.linktoletter = 'Letter not required';
                     d.lettersentdate = 'n/a';
@@ -140,30 +140,70 @@
                 if (!d.publicationdelay) {
                     d.publicationdelay = 'None';
                 }
+
+                // Finally, configure data display.
+                // Don't show data for trials that have not yet published the letter.
+                d.show = ((d.lettersentdate === 'Not required') || (d.letterpublisheddate !== ''));
+
+                // Show letter date (and link to letter) if appropriate.
+                if (d.linktoletter === 'Letter not required') {
+                    d.lettersent = d.linktoletter;
+                } else {
+                    d.lettersent = d.lettersentdate;
+                    if (d.show && d.linktoletter) {
+                        d.lettersent += " <a target='_blank' href='" + d.linktoletter + "'>";
+                        d.lettersent += "Read online</a>";
+                    }
+                }
+                // Other columns to remove if trial is not yet public.
+                if (d.show) {
+                    d.linktoassessment = "<a href='" + d.linktoassessment + "'>Read online</a>";
+                } else {
+                    d.linktoassessment = not_public_str;
+                    d.outcomes_str = {
+                        'sort': 0,
+                        'display': not_public_str
+                    };
+                    d.non_prespecified_outcomes = {
+                        'sort': 0,
+                        'display': not_public_str
+                    };
+                }
             },
             callback: function(data, tabletop) {
                 drawTable(data);
+                $("#total_trial_count").html(total_trial_count);
+                var mean_prespec_propn = (total_correct_outcomes / total_all_outcomes) * 100;
+                $("#mean_prespec_propn").html(Math.round(mean_prespec_propn * 10) / 10 + '%');
+                var mean_nonprespec_count = total_nonprespec_reported / total_trial_count;
+                $('#mean_nonprespec_count').html(Math.round(mean_nonprespec_count * 10) / 10);
+                $('#total_prespec_unreported').html(total_prespec_unreported);
+                $('#total_nonprespec_reported').html(total_nonprespec_reported);
+
             }
         });
         function parseDate(str) {
-            var parts = str.split("/");
-            var dt = new Date(parseInt(parts[2], 10),
-              parseInt(parts[1], 10) - 1,
-              parseInt(parts[0], 10));
-            var dateStr = dt.getFullYear() + "/";
-            dateStr += ('0' + (dt.getMonth()+1)).slice(-2) + "/";
-            dateStr += ('0' + dt.getDate()).slice(-2);
-            return dateStr;
+            // Parse dates into YYYY-MM-DD, for sorting purposes.
+            var parts = str.split("/"), dt;
+            if (parts.length > 1) {
+                dt = new Date(parseInt(parts[2], 10),
+                  parseInt(parts[1], 10) - 1,
+                  parseInt(parts[0], 10));
+                str = dt.getFullYear() + "/";
+                str += ('0' + (dt.getMonth()+1)).slice(-2) + "/";
+                str += ('0' + dt.getDate()).slice(-2);
+            }
+            return str;
         }
         function drawTable(data){
             var html = '<table class="table table-bordered table-hover ';
-            html += '" id="' + tableId + '" width="100%"></table>';
+            html += '" id="myTable" width="100%"></table>';
             $('#table').html(html);
             $("#myTable").DataTable({
                 data: data,
                 columns: columns,
                 order:[[1, "desc"]],
-                paging : $("#" + tableId).find('tbody tr').length > 10,
+                paging : true,
                 pagingType: "simple",
                 responsive: true
             });
