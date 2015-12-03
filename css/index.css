@@ -5,8 +5,6 @@ body {
     background-image: url(../img/textured-stripes.png);
 }
 
-/* Layout elements */
-
 #main {
     padding-bottom: 20px;
 }
@@ -28,7 +26,7 @@ body {
 
 footer {
   background-color: #1A1A1A;
-  padding-top: 10px;
+  padding: 10px;
 }
 
 footer .logos a {
@@ -210,15 +208,6 @@ span[data-toggle="tooltip"] {
 }
 
 @media (max-width: 767px) {
-  /* No longer used - social in header
-  .navbar-header {
-    float: right;
-  }
-  .social {
-    float: left;
-    padding-top: 14px;
-  } */
-
   .navbar-default .navbar-nav > li {
     padding-left: 12px;
   }
