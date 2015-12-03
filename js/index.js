@@ -202,7 +202,7 @@
             $("#myTable").DataTable({
                 data: data,
                 columns: columns,
-                order:[[1, "desc"]],
+                order:[[0, "asc"]],
                 paging : true,
                 pagingType: "simple",
                 responsive: true
