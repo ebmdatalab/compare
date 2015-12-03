@@ -83,6 +83,11 @@
             proxy: 'https://compare-trials.s3.amazonaws.com',
             postProcess: function(d) {
 
+                for (var k in d) {
+                    if (d.hasOwnProperty(k)) {
+                        d[k] = $.trim(d[k]);
+                    }
+                }
                 total_trial_count += 1;
 
                 // Title and publication date.
