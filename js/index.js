@@ -85,9 +85,10 @@
 
                 for (var k in d) {
                     if (d.hasOwnProperty(k)) {
-                        d[k] = $.trim(d[k]);
+                        d[k] = (typeof(d[k]) === 'string') ? $.trim(d[k]): d[k];
                     }
                 }
+
                 total_trial_count += 1;
 
                 // Title and publication date.
