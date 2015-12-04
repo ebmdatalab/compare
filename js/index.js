@@ -167,11 +167,11 @@
                 } else {
                     d.linktoassessment = not_public_str;
                     d.outcomes_str = {
-                        'sort': 0,
+                        'sort': -1,
                         'display': not_public_str
                     };
                     d.non_prespecified_outcomes = {
-                        'sort': 0,
+                        'sort': -1,
                         'display': not_public_str
                     };
                 }
