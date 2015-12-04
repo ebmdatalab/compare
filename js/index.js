@@ -178,16 +178,17 @@
             },
             callback: function(data, tabletop) {
                 drawTable(data);
-                $("#total_trial_count").html(total_trial_count);
+                $("#total_trial_count").html('<strong>' + total_trial_count + '</strong>');
                 var mean_prespec_propn = (total_correct_outcomes / total_all_outcomes) * 100;
-                $("#mean_prespec_propn").html(Math.round(mean_prespec_propn * 10) / 10 + '%');
+                $("#mean_prespec_propn").html('<strong>' + Math.round(mean_prespec_propn * 10) / 10 + '%</strong>');
                 var mean_nonprespec_count = total_nonprespec_reported / total_trial_count;
-                $('#mean_nonprespec_count').html(Math.round(mean_nonprespec_count * 10) / 10);
-                $('#total_prespec_unreported').html(total_prespec_unreported);
-                $('#total_nonprespec_reported').html(total_nonprespec_reported);
+                $('#mean_nonprespec_count').html('<strong>' + Math.round(mean_nonprespec_count * 10) / 10 + '</strong>');
+                $('#total_prespec_unreported').html('<strong>' + total_prespec_unreported + '</strong>');
+                $('#total_nonprespec_reported').html('<strong>' + total_nonprespec_reported + '</strong>');
 
             }
         });
+
         function parseDate(str) {
             // Parse dates into YYYY-MM-DD, for sorting purposes.
             var parts = str.split("/"), dt;
