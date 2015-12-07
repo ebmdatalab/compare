@@ -50,11 +50,8 @@
         { "data": "lettersent",
           "title": 'Letter sent<span data-toggle="tooltip" title="' + letter_tooltip +'"> <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span></span>',
         },
-        { "data": "letterpublisheddate",
-          "title": "Letter published"
-        },
-        { "data": "publicationdelay",
-          "title": "Reasons for delay or complications"
+        { "data": "letterpublished",
+          "title": "Letter published?"
         }
     ];
 
@@ -88,6 +85,7 @@
                         d[k] = (typeof(d[k]) === 'string') ? $.trim(d[k]): d[k];
                     }
                 }
+
 
                 total_trial_count += 1;
 
@@ -143,10 +141,6 @@
                     d.lettersentdate = 'n/a';
                     d.letterpublisheddate = 'n/a';
                 }
-                if (!d.publicationdelay) {
-                    d.publicationdelay = 'None';
-                }
-
                 // Finally, configure data display.
                 // Don't show data for trials that have not yet published the letter.
                 d.show = ((d.lettersentdate === 'Not required') || (d.letterpublisheddate !== ''));
