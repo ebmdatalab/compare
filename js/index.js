@@ -141,9 +141,9 @@
                     d.lettersentdate = 'n/a';
                     d.letterpublisheddate = 'n/a';
                 }
-                // Finally, configure data display.
-                // Don't show data for trials that have not yet published the letter.
-                d.show = ((d.lettersentdate === 'Not required') || (d.letterpublisheddate !== ''));
+
+                // Finally, configure how much data to display.
+                d.show = (d.letterstatus !== '');
 
                 // Show letter date (and link to letter) if appropriate.
                 if (d.linktoletter === 'Letter not required') {
@@ -158,8 +158,10 @@
                 // Other columns to remove if trial is not yet public.
                 if (d.show) {
                     d.linktoassessment = "<a href='" + d.linktoassessment + "'>Read online</a>";
+                    d.letterpublished = (d.letterstatus === 'Letter published') ? d.letterpublisheddate : d.letterstatus;
                 } else {
                     d.linktoassessment = not_public_str;
+                    d.letterpublished = '';
                     d.outcomes_str = {
                         'sort': -1,
                         'display': not_public_str
