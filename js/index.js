@@ -1,10 +1,18 @@
 (function() {
 
-    var total_trial_count = 0,
-        total_prespec_unreported = 0,
-        total_nonprespec_reported = 0,
-        total_correct_outcomes = 0,
-        total_all_outcomes = 0;
+    var statistics = {
+        total_trial_count: 0,
+        perfect_trial_count: 0,
+        total_prespec_unreported: 0,
+        total_nonprespec_reported: 0,
+        total_correct_outcomes: 0,
+        total_all_outcomes: 0,
+        letters_sent: 0,
+        letters_unpublished: 0,
+        letters_rejected: 0,
+        letters_published: 0,
+        letters_in_pipeline: 0
+    };
     not_public_str = 'Not yet public';
 
     var assessment_tooltip = "We give the journal four weeks to publish the trial.";
@@ -85,9 +93,7 @@
                         d[k] = (typeof(d[k]) === 'string') ? $.trim(d[k]): d[k];
                     }
                 }
-
-
-                total_trial_count += 1;
+                statistics.total_trial_count += 1;
 
                 // Title and publication date.
                 d.trial = "<strong>" + d.journalname + "</strong>: <a target='_blank' href='";
@@ -106,15 +112,15 @@
                 d.correct_outcomes += (secondary_correct) ? secondary_correct : 0;
                 d.correct_outcomes += (primary_elsewhere) ? primary_elsewhere : 0;
                 d.correct_outcomes += (secondary_elsewhere) ? secondary_elsewhere : 0;
-                total_correct_outcomes += d.correct_outcomes;
+                statistics.total_correct_outcomes += d.correct_outcomes;
 
                 // Parse denominator for prespecified outcomes column.
                 var total_primary = d.totalnumberofprespecifiedprimaryoutcomes,
                     total_secondary = d.totalnumberofprespecifiedsecondaryoutcomes;
                 d.all_outcomes = (total_primary) ? total_primary : 0;
                 d.all_outcomes += (total_secondary) ? total_secondary : 0;
-                total_all_outcomes += d.all_outcomes;
-                total_prespec_unreported += (d.all_outcomes - d.correct_outcomes);
+                statistics.total_all_outcomes += d.all_outcomes;
+                statistics.total_prespec_unreported += (d.all_outcomes - d.correct_outcomes);
 
                 // Parse numerator and denominator into final values for sort and display.
                 d.outcomes_str = {};
@@ -130,38 +136,44 @@
                     'sort': val,
                     'display': val
                 };
-                total_nonprespec_reported += val;
+                statistics.total_nonprespec_reported += val;
 
+                // Sort out dates and what to show.
+                d.show = (d.letterstatus !== '');
                 d.lettersentdate = parseDate(d.lettersentdate);
+                if (d.lettersentdate !== '') {
+                    statistics.letters_sent += 1;
+                }
                 d.letterpublisheddate = parseDate(d.letterpublisheddate);
 
-                // Show friendly strings where required.
-                if (d['finaldecision-letterrequired'] === 'No') {
-                    d.linktoletter = 'Letter not required';
-                    d.lettersentdate = 'n/a';
-                    d.letterpublisheddate = 'n/a';
-                }
-
-                // Finally, configure how much data to display.
-                d.show = (d.letterstatus !== '');
-
-                // Show letter date (and link to letter) if appropriate.
-                if (d.linktoletter === 'Letter not required') {
-                    d.lettersent = d.linktoletter;
+                // Configure whether to show letter sent date.
+                // And update statistics.
+                if (d.letterstatus === 'Letter not required') {
+                    d.lettersent = d.letterstatus;
+                    statistics.perfect_trial_count += 1;
                 } else {
                     d.lettersent = d.lettersentdate;
                     if (d.show && d.linktoletter) {
                         d.lettersent += " <a target='_blank' href='" + d.linktoletter + "'>";
                         d.lettersent += "Read online</a>";
                     }
+                    if (d.letterstatus === 'Letter rejected by editor') {
+                        statistics.letters_rejected += 1;
+                    } else if (d.letterstatus === 'Letter published') {
+                        statistics.letters_published += 1;
+                    } else if (d.letterstatus === 'Letter unpublished after 4 weeks') {
+                        statistics.letters_unpublished += 1;
+                    }
                 }
-                // Other columns to remove if trial is not yet public.
+
+                // Configure whether to show link to assessment, and letter
+                // published date. Also configure sort strings.
                 if (d.show) {
                     d.linktoassessment = "<a href='" + d.linktoassessment + "'>Read online</a>";
                     d.letterpublished = (d.letterstatus === 'Letter published') ? d.letterpublisheddate : d.letterstatus;
                 } else {
                     d.linktoassessment = not_public_str;
-                    d.letterpublished = '';
+                    d.letterpublished = 'Not yet published';
                     d.outcomes_str = {
                         'sort': -1,
                         'display': not_public_str
@@ -173,15 +185,21 @@
                 }
             },
             callback: function(data, tabletop) {
+                statistics.letters_in_pipeline = statistics.letters_sent - statistics.letters_unpublished - statistics.letters_rejected - statistics.letters_published;
+                statistics.mean_prespec_propn = (statistics.total_correct_outcomes / statistics.total_all_outcomes) * 100;
+                statistics.mean_nonprespec_count = statistics.total_nonprespec_reported / statistics.total_trial_count;
+                var options = {
+                  useEasing : true,
+                  useGrouping : true
+                };
+                for (var k in statistics) {
+                    if ($('#' + k).length) {
+                        var decimal_places = (k.slice(0, 5) === 'mean_') ? 1 : 0;
+                        var demo = new CountUp(k, 0, statistics[k], decimal_places, 2.5, options);
+                        demo.start();
+                    }
+                }
                 drawTable(data);
-                $("#total_trial_count").html('<strong>' + total_trial_count + '</strong>');
-                var mean_prespec_propn = (total_correct_outcomes / total_all_outcomes) * 100;
-                $("#mean_prespec_propn").html('<strong>' + Math.round(mean_prespec_propn * 10) / 10 + '%</strong>');
-                var mean_nonprespec_count = total_nonprespec_reported / total_trial_count;
-                $('#mean_nonprespec_count').html('<strong>' + Math.round(mean_nonprespec_count * 10) / 10 + '</strong>');
-                $('#total_prespec_unreported').html('<strong>' + total_prespec_unreported + '</strong>');
-                $('#total_nonprespec_reported').html('<strong>' + total_nonprespec_reported + '</strong>');
-
             }
         });
 

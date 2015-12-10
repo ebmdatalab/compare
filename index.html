@@ -3,7 +3,7 @@
 <head>
     <title>COMPare: Tracking switched outcomes in clinical trials</title>
 
-    <meta name="description" content="The COMPare project takes a new approach to identifying switched outcomes in clinical trials. We are monitoring all trials published in all top five medical journals, identifying the switched outcomes, then writing to the journal to correct the record, and posting the results online.">
+    <meta name="description" content="Outcome switching in clinical trials is a serious problem. The COMPare project is systematically checking every trial published in the top five medical journals, to see if they have misreported their findings.">
     <meta name="copyright" content="EBM Data Lab, Centre for Evidence-Based Medicine, University of Oxford" />
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
@@ -11,12 +11,12 @@
 
     <meta property="og:title" content="COMPare: Tracking switched outcomes in clinical trials" />
     <meta property="og:type" content="article" />
-    <meta property="og:description" content="The COMPare project takes a new approach to identifying switched outcomes in clinical trials. We are monitoring all trials published in all top five medical journals, identifying the switched outcomes, then writing to the journal to correct the record, and posting the results online." />
+    <meta property="og:description" content="Outcome switching in clinical trials is a serious problem. The COMPare project is systematically checking every trial published in the top five medical journals, to see if they have misreported their findings." />
 
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@bengoldacre" />
     <meta name="twitter:title" content="COMPare: Tracking switched outcomes in clinical trials" />
-    <meta name="twitter:description" content="The COMPare project takes a new approach to identifying switched outcomes in clinical trials. We are monitoring all trials published in all top five medical journals, identifying the switched outcomes, then writing to the journal to correct the record, and posting the results online." />
+    <meta name="twitter:description" content="Outcome switching in clinical trials is a serious problem. The COMPare project is systematically checking every trial published in the top five medical journals, to see if they have misreported their findings." />
     <meta name="twitter:image" content="/img/twitter-card.png" />
 
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/s/bs-3.3.5/jqc-1.11.3,dt-1.10.10,fh-3.1.0,r-2.0.0/datatables.min.css"/>
@@ -55,7 +55,9 @@
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
             <li class="active"><a href="#">Home</a></li>
-            <li><a href="#results">Our results</a></li>
+            <li><a href="#results">Full results</a></li>
+            <li><a href="#problem">The problem</a></li>
+            <li><a href="#approach">Our approach</a></li>
             <li><a href="#team">Our team</a></li>
             <li><a href="#contact">Contact</a></li>
           </ul>
@@ -66,42 +68,93 @@
      <div class="container" id="main">
 
         <h1>The <span class="stronger">COMP</span>are Project</h1>
-        <h3><span class="stronger">C</span>entre for Evidence-Based Medicine <span class="stronger">O</span>utcomes <span class="stronger">M</span>onitoring <span class="stronger">P</span>roject: Tracking Switched Outcomes in Clinical Trials</h3>
+        <h3>Tracking Switched Outcomes in Clinical Trials</h3>
 
-        <hr />
+        <hr style="margin-bottom: 36px" />
 
-        <h2 id="problem">The problem</h2>
+         <p>Outcome switching in clinical trials is a serious problem (<a href="#problem">read why</a>). We are systematically checking every trial published in the top five medical journals, to see if they have misreported their findings.</p>
 
-        <p>Before carrying out a clinical trial, all outcomes that will be measured (e.g. blood pressure after one year of treatment) must be pre-specified in a trial protocol and on a clinical trial registry (e.g. <a href="http://clinicaltrials.gov">clinicaltrials.gov</a>). This is because if researchers measure lots of things, some of those things are likely to give a positive result by random chance (a false positive). A pre-specified outcome is much less likely to give a false-positive result. In the trial report, all pre-specified outcomes must then be reported, to ensure a fair picture of the trial results.</p>
+        <p>First, we compare each clinical trial report against its registry entry. Some trials report their outcomes perfectly. For the others, we count how many of the outcomes specified in the registry were never reported. And we count how many outcomes were silently added.</p>
 
-        <p>However, pre-specified outcomes are often left <em>unreported</em>, while novel outcomes that were not pre-specified <em>are</em> reported. This is an extremely common problem that distorts the evidence we use to make real-world clinical decisions.</p>
+        <p>Second, whenever we detect unreported or added outcomes, we write a letter to the journal pointing them out, so that readers are aware of the problems.  We are tracking which journals have published our letters after 4 weeks - and which haven't (see <a href='#approach'>our approach</a>).</p>
 
-        <h2 id="approach">Our approach</h2>
-
-        <p>The COMPare project takes a new approach. We are monitoring all trials published in the top five medical journals (NEJM, JAMA, The Lancet, Annals of Internal Medicine, BMJ). We are analysing each trial for outcome switching, by comparing the clinical trials registry and trial protocol with the trial report. For any trial where we find that outcomes have been switched, we are writing letters to the journal to correct the record. All of our results will also be posted here.</p>
-
-        <p>Through increased awareness of misreported outcomes, individual accountability, and feedback for specific journals, we hope to fix this ongoing problem.</p>
-
-        <p>Download <a href="downloads/protocol.pdf">our protocol</a> (PDF).</p>
+         <p>Here's what we've found so far. Our project is ongoing since October 2015, and these numbers are updated live.</p>
 
 
-        <h2 id="results">Our results</h2>
+        <div class="row">
+          <div class="col-sm-3 col-md-3 statistic">
+            <div class="number"><span id='total_trial_count'><img src="/img/loading.svg" /></span></div>
+            <div class="caption">trials checked to date</div>
+          </div>
+         <div class="col-sm-3 col-md-3 statistic">
+            <div class="number"><span id='perfect_trial_count'><img src="/img/loading.svg" /></span></div>
+            <div class="caption">trials were perfect</div>
+          </div>
+         <div class="col-sm-3 col-md-3 statistic">
+            <div class="number"><span id='total_prespec_unreported'><img src="/img/loading.svg" /></span></div>
+            <div class="caption">outcomes not reported</div>
+          </div>
+          <div class="col-sm-3 col-md-3 statistic">
+            <div class="number"><span id='total_nonprespec_reported'><img src="/img/loading.svg" /></span></div>
+            <div class="caption">new outcomes silently added</div>
+          </div>
+        </div>
+        <br/>
 
-          <p>The table below gives live data from the project, but for now the specific data for letters submitted but not yet accepted by journals is withheld. This is to avoid journals using prior publication as a reason for not publishing our correction letters on these trials.</p>
+        <p>On average, each trial reported just <span id='mean_prespec_propn'><em>loading...</em></span>% of its specified outcomes. And on average, each trial silently added <span id='mean_nonprespec_count'><em>loading...</em></span> new outcomes.</p>
 
-          <p>As a result, the table below gives a misleadingly positive impression of the data as it stands, because it shows the data for many trials that were perfectly reported, and hides the data for those where the reporting was extremely poor, but where the journal has not published our letter pointing out the discrepancies.</p>
+        <div class="row">
+          <div class="col-sm-3 col-md-3 statistic">
+            <div class="number"><span id="letters_sent"><img src="/img/loading.svg" /></span></div>
+            <div class="caption">letters sent</div>
+          </div>
+          <div class="col-sm-3 col-md-3 statistic">
+            <div class="number"><span id="letters_published"><img src="/img/loading.svg" /></span></div>
+            <div class="caption">letters published</div>
+          </div>
+          <div class="col-sm-3 col-md-3 statistic">
+            <div class="number"><span id="letters_unpublished"><img src="/img/loading.svg" /></span></div>
+            <div class="caption">letters unpublished after 4 weeks</div>
+          </div>
+          <div class="col-sm-3 col-md-3 statistic">
+            <div class="number"><span id="letters_rejected"><img src="/img/loading.svg" /></span></div>
+            <div class="caption">letters rejected by editor</div>
+          </div>
+        </div>
 
-          <p>In reality, as of <span id='total_trial_count'><em>loading</em></span> trials assessed to date, the current overall mean proportion of prespecified outcomes reported is <span id='mean_prespec_propn'><em>loading</em></span>, and the mean number of non-prespecified outcomes added is <span id='mean_nonprespec_count'><em>loading</em></span>. The total number of prespecified outcomes left unreported to date is <span id='total_prespec_unreported'><em>loading</em></span>. The total number of non-prespecified outcomes reported is <span id='total_nonprespec_reported'><em>loading</em></span>.</p>
+        <br/>
+
+        <p><span id="letters_in_pipeline"><em>Loading...</em></span> letters are still awaiting a result, having been sent to journals less than 4 weeks ago.</p>
+
+        <h2 id="results">Full results</h2>
+
+          <p>The table below shows every trial we've assessed to date, with our assessments and letters. However, it shows only summary data for trials where a letter has been sent in the last 4 weeks. This is so journals can't use 'prior publication' as a reason not to publish our letters.</p>
 
         <div id="table">
             <div id="loading">Loading trials...</div>
         </div>
+
+        <h2 id="problem">Why this matters</h2>
+
+        <p>Before carrying out a clinical trial, all outcomes that will be measured (e.g. blood pressure after one year of treatment) must be pre-specified in a trial protocol and on a clinical trial registry (e.g. <a href="http://clinicaltrials.gov">ClinicalTrials.gov</a>).</p>
+
+        <p>This is because if researchers measure lots of things, some of those things are likely to give a positive result by random chance (a false positive). A pre-specified outcome is much less likely to give a false-positive result. In the trial report, all pre-specified outcomes must then be reported, to ensure a fair picture of the trial results.</p>
+
+        <p>However, in reality, pre-specified outcomes are often left unreported, while novel outcomes that were not pre-specified are reported. This is an extremely common problem that distorts the evidence we use to make real-world clinical decisions.</p>
+
+        <h2 id="approach">Our approach</h2>
+
+        <p>The <a href="http://cebm.net">CEBM</a> Outcome Monitoring Project (COMPare) takes a new approach. We are monitoring all trials published in the top five medical journals (NEJM, JAMA, The Lancet, Annals of Internal Medicine, BMJ). We are analysing each trial for outcome switching, by comparing the clinical trials registry and trial protocol with the trial report. For any trial where we find that outcomes have been switched, we are writing letters to the journal to correct the record. All of our results will also be posted here.</p>
 
         <p>The table above contains a row for every trial. There are links to our letter, and the letter's publication status. We also show a summary of the data: the number of prespecified outcomes correctly reported (for a correctly reported paper this should be 100%); and the number of novel, undeclared, non-prespecified outcomes added in the paper (for a correctly reported paper this should be 0).</p>
 
         <p>Each row also contains a link to our full assessment sheet for that trial, which is filled out by the two coders who audited that trial, then checked at our weekly project meeting. It lists the pre-specified primary outcomes, whether they were reported, and also lists any new outcomes added. This raw datasheet is shared online to ensure that all our data and working is fully transparent. We are happy to receive <a href="#contact">feedback</a> on any scoring from the trialists concerned.</p>
 
         <p>Some trials have perfect outcome reporting and no letter is required: these are posted immediately to the table above. Otherwise, we add trials to the table either (i) four weeks after sending our letter, or (ii) when the journal publishes or refuses to publish the letter (whichever comes first). All letters are also posted to <a href="http://www.ncbi.nlm.nih.gov/pubmedcommons/">PubMedCommons</a>, to try to ensure that the information on outcome switching is available to those using the trial to make decisions about patient care.</p>
+
+        <p> Download <a href="downloads/protocol.pdf">our full protocol</a> (PDF).</p>
+
+        <p>Through increased awareness of misreported outcomes, individual accountability, and feedback for specific journals, we hope to fix the ongoing problem of outcome switching.</p>
 
        <h2 id="team">Our team</h2>
 
@@ -165,8 +218,7 @@
             <div class="thumbnail bio">
                 <img src="/img/eirion.png" alt="Eirion Slade">
                 <h3>Eirion Slade</h3>
-                <p>Eirion Slade is a graduate-entry medical student and tutor at St Catherine’s college, Oxford. He graduated with an MPhys degree in physics from Keble College, Oxford, during which he specialised in quantum optics and information theory.
-                He also works as a private physics and maths tutor in Oxford. He has a special interest in orthopaedic surgery and is dedicated to ensuring that medical and surgical evidence is produced and interpreted in a way that maximises the wellbeing of patients.</p>
+                <p>Eirion Slade is a graduate-entry medical student and tutor at St Catherine’s College, Oxford. He graduated with an MPhys degree in physics from Keble College, Oxford, during which he specialised in quantum optics and information theory. He also works as a private physics and maths tutor in Oxford. He has a special interest in orthopaedic surgery and is dedicated to ensuring that medical and surgical evidence is produced and interpreted in a way that maximises the wellbeing of patients.</p>
             </div>
           </div>
         </div>
@@ -200,7 +252,7 @@
             <div class="thumbnail bio">
                 <img src="/img/anna.jpg" alt="Anna Powell-Smith">
                 <h3>Anna Powell-Smith</h3>
-                <p>Anna Powell-Smith is a computer programmer, specialising in data analysis and data visualisation. She is currently working with the <a href="http://cebm.net">Centre for Evidence-Based Medicine</a> on various projects for the <a href="http://ebmdatalab.net">EBM Data Lab</a>.  You can see more of her work at <a href="http://anna.ps">anna.ps</a>.</p>
+                <p>Anna Powell-Smith is a computer programmer, specialising in data analysis and data visualisation. She works with commercial and non-profit clients. Her work has been featured in the Guardian, Economist, Private Eye and many other places. She is currently working with the <a href="http://cebm.net">Centre for Evidence-Based Medicine</a> on various projects for the <a href="http://ebmdatalab.net">EBM Data Lab</a>.  You can see more of her work at <a href="http://anna.ps">anna.ps</a> and she is <a href="https://twitter.com/darkgreener">@darkgreener</a> on Twitter.</p>
             </div>
           </div>
 
@@ -228,6 +280,7 @@
     <script type="text/javascript" src="https://cdn.datatables.net/s/bs-3.3.5/jqc-1.11.3,dt-1.10.10,fh-3.1.0,r-2.0.0/datatables.min.js"></script>
     <script src="/js/tabletop.js"></script>
     <script src="/js/trunk8.js"></script>
+    <script src="/js/countUp.js"></script>
     <script src="/js/index.js"></script>
 
 </body>
