@@ -141,7 +141,7 @@
                 // Sort out dates and what to show.
                 d.show = (d.letterstatus !== '');
                 d.lettersentdate = parseDate(d.lettersentdate);
-                if (d.lettersentdate !== '') {
+                if ((d.lettersentdate !== '') && (d.letterstatus !== 'Letter not required')) {
                     statistics.letters_sent += 1;
                 }
                 d.letterpublisheddate = parseDate(d.letterpublisheddate);
