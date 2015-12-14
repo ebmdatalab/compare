@@ -169,7 +169,7 @@
                 // Configure whether to show link to assessment, and letter
                 // published date. Also configure sort strings.
                 if (d.show) {
-                    d.linktoassessment = "<a href='" + d.linktoassessment + "'>Read online</a>";
+                    d.linktoassessment = "<a href='" + d.linktoassessment + "' target='blank'>Read online</a>";
                     d.letterpublished = (d.letterstatus === 'Letter published') ? d.letterpublisheddate : d.letterstatus;
                 } else {
                     d.linktoassessment = not_public_str;
