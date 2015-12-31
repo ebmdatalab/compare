@@ -98,7 +98,7 @@
                 // Title and publication date.
                 d.trial = "<strong>" + d.journalname + "</strong>: <a target='_blank' href='";
                 d.trial += d.linktoonlinetrialreport + "'>";
-                d.trial += (d.trialtitle.length > 100) ? d.trialtitle.substring(0, 100) + '...' : d.trialtitle;
+                d.trial += (d.trialtitle && d.trialtitle.length > 100) ? d.trialtitle.substring(0, 100) + '...' : d.trialtitle;
                 d.trial += "</a>";
                 d.trialpublicationdate = parseDate(d.publicationdate);
 
